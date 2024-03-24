@@ -32,4 +32,35 @@ function getUniqueUtensils(recipes) {
     return Array.from(allUtensils);
 }
 
-export { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils }
+// Filtre les recettes en fonction de l'ingrédient spécifié
+function filterByIngredient(recipes, ingredient) {
+    const filteredRecipes = recipes.filter(recipe => 
+        recipe.ingredients.some(ing => 
+            ing.ingredient.toLowerCase() === ingredient.toLowerCase()
+        )
+    );
+    console.log(`Recettes filtrées par l'ingrédient '${ingredient}':`, filteredRecipes);
+    return filteredRecipes;
+}
+
+// Filtre les recettes en fonction de l'appareil spécifié
+function filterByAppliance(recipes, appliance) {
+    const filteredRecipes = recipes.filter(recipe => 
+        recipe.appliance.toLowerCase() === appliance.toLowerCase()
+    );
+    console.log(`Recettes filtrées par l'appareil '${appliance}':`, filteredRecipes);
+    return filteredRecipes;
+}
+
+// Filtre les recettes en fonction de l'ustensile spécifié
+function filterByUtensil(recipes, utensil) {
+    const filteredRecipes = recipes.filter(recipe => 
+        recipe.ustensils.some(ust => 
+            ust.toLowerCase() === utensil.toLowerCase()
+        )
+    );
+    console.log(`Recettes filtrées par l'ustensile '${utensil}':`, filteredRecipes);
+    return filteredRecipes;
+}
+
+export { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, filterByIngredient, filterByAppliance, filterByUtensil };
