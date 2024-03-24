@@ -7,6 +7,19 @@ function getInitialRecipes() {
     return recipes;
 }
 
+function filterRecipes(recipes) {
+    // Filtrer par l'ingrédient "jus de citron"
+    let filteredRecipes = filterByIngredient(recipes, "jus de citron");
+    // Filtrer par l'ingrédient "lait de coco"
+    filteredRecipes = filterByIngredient(filteredRecipes, "lait de coco");
+    // Filtrer par l'appareil "blender"
+    filteredRecipes = filterByAppliance(filteredRecipes, "blender");
+    // Filtrer par l'ustensile "verres"
+    filteredRecipes = filterByUtensil(filteredRecipes, "verres");
+    console.log("Recettes filtrées selon les critères donnés:", filteredRecipes);
+    return filteredRecipes;
+}
+
 
 
 
@@ -26,6 +39,9 @@ function init() {
     filterByAppliance(recipes, "four");
     // Filtrer les recettes par l'ustensile "citron".
     filterByUtensil(recipes, "couteau");
+
+    // Afficher les recettes filtreées
+    filterRecipes(getInitialRecipes());
 }
 
 // Appel de la fonction d'initialisation après chargement du DOM
