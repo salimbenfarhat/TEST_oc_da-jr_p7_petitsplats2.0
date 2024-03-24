@@ -6,6 +6,7 @@ function getUniqueIngredients(recipes) {
             allIngredients.add(ingredient.ingredient.toLowerCase());
         });
     });
+    console.log("Ingrédients uniques:", Array.from(allIngredients));
     return Array.from(allIngredients);
 }
 
@@ -15,6 +16,7 @@ function getUniqueAppliances(recipes) {
     recipes.forEach(recipe => {
         allAppliances.add(recipe.appliance.toLowerCase());
     });
+    console.log("Appareils uniques:", Array.from(allAppliances));
     return Array.from(allAppliances);
 }
 
@@ -26,6 +28,7 @@ function getUniqueUtensils(recipes) {
             allUtensils.add(utensil.toLowerCase());
         });
     });
+    console.log("Ustensiles uniques:", Array.from(allUtensils));
     return Array.from(allUtensils);
 }
 
