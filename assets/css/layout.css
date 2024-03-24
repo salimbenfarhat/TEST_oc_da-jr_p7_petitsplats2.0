@@ -1,0 +1,435 @@
+/* 
+  Auteur: Salim Benfarhat
+  Description: Feuille de style du projet "Les Ptits Plats" dans le cadre de la formation Openclassrooms "Developpeur Application - Javascript React"
+*/
+
+/* Variables
+====================== */
+:root {
+  --deepblack: #1B1B1B;
+  --yellow: #FFD15B;
+  --grey: #7A7A7A;
+  --lightgrey: #EDEDED;
+  --white: #FFFFFF;
+  --black: #000000;
+  --primary-font: "Anton", sans-serif;
+  --secondary-font: "Manrope", sans-serif;
+}
+
+/* Structure de base
+====================== */
+body {
+  max-width: 1440px;
+  margin: 0 auto !important;
+  background: var(--lightgrey);
+}
+
+/* En-tête
+====================== */
+#logo {
+  position: relative;
+  width: calc(min(100vw, 180.35px));
+  height: calc(min(100vh, 25.26px));
+}
+
+.bg-img {
+  background-image: url(../img/banner.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 380px;
+}
+
+.header-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: clamp(65px, calc(9vw - 65px), 227px) 0 clamp(65px, calc(9vw - 65px), 227px) 0;
+}
+
+.header-block p {
+  color: var(--yellow);
+  text-align: center;
+  font-family: var(--primary-font);
+  font-size: clamp(1.7rem, 5vw, 44px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#searchbar {
+  width: 70%;
+  position: relative;
+}
+
+
+#searchbar input {
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--grey);
+  height: 70px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+#searchbar svg {
+  place-items: center;
+  position: absolute;
+  right: 80px;
+  top: 22px;
+  display: none;
+}
+
+#searchbar button {
+  width: 55px;
+  height: 55px;
+  background: var(--deepblack);
+  border-radius: 10px;
+  place-items: center;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  top: 7px;
+}
+
+#searchbar button:hover {
+  background: var(--yellow);
+  border: none;
+}
+
+#searchbar button i {
+  color: var(--white);
+  font-size: 25px;
+}
+
+#searchbar button i:hover {
+  color: var(--black);
+}
+
+/* Barre de navigation des filtres
+====================== */
+.navbar {
+  background: rgba(var(--bs-light-rgb), 0) !important;
+}
+
+#totalRecipes {
+  font-family: var(--primary-font);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 32px;
+  position: absolute;
+  /* Position absolue pour le nombre de recettes */
+  top: 0;
+  /* Ajustez ces valeurs selon le besoin */
+  right: 0;/
+}
+
+.navigation-bar {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.navigation-bar b {
+  font-family: var(--primary-font);
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--deepblack);
+  padding-top: 28px;
+}
+
+.navigation-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  column-gap: clamp(15px, 4.5vw + 5px, 65px);
+  margin-top: 2em;
+}
+
+.navigation-bar li {
+  float: left;
+}
+
+.dropbtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  width: 250px;
+  background: var(--white);
+  padding: 16px;
+  color: var(--deepblack);
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  text-align: left;
+  border-radius: 10px;
+  top: 0;
+  z-index: 100;
+}
+
+.dropbtn:hover {
+  background-color: #fff;
+}
+
+.dropbtn span {
+  margin-left: 10px;
+}
+
+.arrow-down::after {
+  content: url('data:image/svg+xml;utf8,<svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L7.5 7L14 1" stroke="%231B1B1B" stroke-linecap="round"/></svg>');
+}
+
+.arrow-up::after {
+  content: url('data:image/svg+xml;utf8,<svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7L7.5 1L14 7" stroke="%231B1B1B" stroke-linecap="round"/></svg>');
+}
+
+.dropdown:hover .dropdown-content {
+  height: 250px;
+  position: relative;
+  top: -15px;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 0;
+  overflow: hidden;
+  scrollbar-width: none;
+  background: var(--white);
+  color: var(--deepblack);
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 10px;
+  max-width: 250px;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.dropdown-content ul {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  max-height: inherit;
+  overflow-y: visible;
+}
+
+.dropdown-content ul::-webkit-scrollbar {
+  width: 0;
+}
+
+.dropdown-content li:hover {
+  background-color: var(--yellow);
+}
+
+.dropdown-content li:hover .cross-svg,
+.badge:hover .cross-svg {
+  display: inline;
+}
+
+.croce {
+  width: 13.5px;
+  height: 14px;
+  transform: translateX(60px) translateY(10px);
+}
+
+.active-item {
+  background-color: var(--yellow);
+}
+
+.active-item:hover button {
+  font-weight: 900;
+}
+
+.active-item:hover .svg-icon {
+  display: inline-block;
+}
+
+.active-item button {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.active-item button:hover .svg-icon {
+  transform: translateX(0px);
+}
+
+.svg-icon {
+  display: none;
+}
+
+#ingredient, #ingredientSelected,
+#appliance, #applianceSelected,
+#utensil, #utensilSelected {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+#ingredient li, #ingredientSelected li,
+#appliance li, #applianceSelected li,
+#utensil li, #utensilSelected li {
+  padding: 0.4em 0 0.4em 16px;
+  list-style: none;
+  text-transform: lowercase;
+}
+
+#ingredient li::first-letter, #ingredientSelected::first-letter
+#appliance li::first-letter, #applianceSelected::first-letter
+#utensil li::first-letter, #utensilSelected::first-letter {
+  text-transform: capitalize;
+}
+
+#ingredient li button, #ingredientSelected li button,
+#appliance li button, #applianceSelected li button,
+#utensil li button, #utensilSelected li button {
+  text-decoration: none;
+  color: var(--deepblack);
+  border: none;
+  background: none;
+  text-align: left;
+  width: 90%;
+}
+
+/*#ingredient li:hover, #ingredient li:active, #appliance li:hover, #appliance li:active, #utensil li:hover, #utensil li:active {
+  background: var(--yellow);
+}*/
+
+
+input[type="text"] {
+  border: none;
+  outline: none;
+  width: 120px;
+  height: 34px;
+  color: #7A7A7A;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 8px;
+  background: #FFF;
+}
+
+.input-group {
+  width: auto;
+  height: 36px;
+  border-radius: 2px;
+  border: 1px solid #C6C6C6;
+  margin: 10px 15px 10px 15px;
+}
+
+#badgesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.badge {
+  display: inline-flex;
+  color: var(--black);
+  background: var(--yellow);
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 17px 18px;
+  align-items: center;
+  gap: 60px;
+  border-radius: 10px;
+  line-height: normal;
+  height: 60px;
+  border: none;
+}
+
+/* Bloc de recettes affichés sous forme de carte
+====================== */
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.card-body {
+  margin: 0 1em 1em 1em;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 253px;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: var(--black);
+  font-family: var(--primary-font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.card-subtitle {
+  color: var(--grey);
+  font-family: var(--secondary-font);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-text {
+  color: var(--deepblack);
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#ingredientsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px 10px;
+}
+
+#ingredientsList li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--deepblack);
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ingredient-quantity {
+  color: var(--grey);
+  font-family: var(--secondary-font);
+  font-size: 14px;
+  font-weight: 400;
+}

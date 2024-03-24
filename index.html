@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les Petits Plats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
+</head>
+
+<body>
+  <header class="bg-img text-white p-5">
+    <img id="logo" src="./assets/img/Logo.png" alt="Logo Les Petits Plats" height="40" width="330">
+    <div class="header-block">
+      <p>Cherchez parmi plus de 1500 recettes<br>du quotidien, simples et délicieuses</p>
+      <form id="searchbar">
+        <input class="form-control form-control-lg me-2" type="search"
+          aria-label="Chercher une recette ou un ingrédient" placeholder="Chercher une recette, un ingrédient, ...">
+        <svg class="svgBtn" width="25" height="25" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#7A7A7A" stroke-width="2.16667"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <button class="btn" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </header>
+  <main>
+    <nav class="navigation-bar px-5">
+      <ul>
+        <li class="dropdown">
+          <button class="dropbtn">Ingrédients
+            <span class="arrow-down"></span>
+          </button>
+          <div class="dropdown-content">
+            <div class="input-group">
+              <input type="text" name="ingredientField">
+              <svg class="croce" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+              </svg>
+            </div>
+            <ul id="ingredientSelected"></ul>
+            <ul id="ingredient"></ul>
+          </div>
+        </li>
+        <li class="dropdown">
+          <button class="dropbtn">Appareils
+            <span class="arrow-down"></span>
+          </button>
+          <div class="dropdown-content">
+            <div class="input-group">
+              <input type="text" name="applianceField">
+              <svg class="croce" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+              </svg>
+            </div>
+            <ul id="applianceSelected"></ul>
+            <ul id="appliance"></ul>
+          </div>
+        </li>
+        <li class="dropdown">
+          <button class="dropbtn">Ustensiles
+            <span class="arrow-down"></span>
+          </button>
+          <div class="dropdown-content">
+            <div class="input-group">
+              <input type="text" name="utensilField">
+              <svg class="croce" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+              </svg>
+            </div>
+            <ul id="utensilSelected"></ul>
+            <ul id="utensil"></ul>
+          </div>
+        </li>
+      </ul>
+      <b id="totalRecipes">0 recettes</b>
+    </nav>
+    <section id="badgesContainer" class="px-5 py-5">
+    </section>
+    <section class="row row-cols-1 row-cols-md-3 g-5 px-5 pb-5" id="recipes"></section>
+  </main>
+
+  <!-- Entry point -->
+  <script src="scripts/main.js" type="module"></script>
+  <template id="recipeCard">
+    <div class="col">
+      <div class="card">
+        <img class="card-img-top">
+        <div class="card-img-overlay d-flex justify-content-end">
+          <span class="badge"></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <span class="card-subtitle">Recette</span>
+          <p class="card-text"></p>
+          <span class="card-subtitle">Ingrédients</span>
+          <ul id="ingredientsList"></ul>
+        </div>
+      </div>
+    </div>
+  </template>
+</body>
+
+</html>
