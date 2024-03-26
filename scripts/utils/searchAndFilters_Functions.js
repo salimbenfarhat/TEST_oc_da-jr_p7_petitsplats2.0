@@ -1,3 +1,22 @@
+// Filtre les recettes en fonction de la recherche
+function searchByQuery(recipes, query) {
+   const filteredRecipes = recipes.filter(recipe => {
+        // Utilisation de la méthode filter pour filtrer les recettes
+        return (
+          // Vérifier si le nom de la recette inclut la valeur de recherche
+          recipe.name.toLowerCase().includes(query.toLowerCase()) ||
+          // Vérifier si la recherche correspond à l'un des ingrédients de la recette
+          recipe.ingredients.some(ingredient =>
+            ingredient.ingredient.toLowerCase().includes(query.toLowerCase())
+          ) ||
+          // Vérifier si la description de la recette inclut la valeur de recherche
+          recipe.description.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+      console.log("Recettes filtrées:", filteredRecipes);
+    return filteredRecipes;
+}
+
 // Retourne un tableau des ingrédients uniques en minuscules
 function getUniqueIngredients(recipes) {
     const allIngredients = new Set();
@@ -63,4 +82,4 @@ function filterByUtensil(recipes, utensil) {
     return filteredRecipes;
 }
 
-export { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, filterByIngredient, filterByAppliance, filterByUtensil };
+export { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, searchByQuery, filterByIngredient, filterByAppliance, filterByUtensil };
