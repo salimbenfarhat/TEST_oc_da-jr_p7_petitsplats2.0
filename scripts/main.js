@@ -1,7 +1,7 @@
 import { recipes } from '../data/recipes.js';
 import { displayRecipes } from '../scripts/ui/display.js';
-import { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, filterByIngredient, filterByAppliance, filterByUtensil } from '../scripts/utils/filters.js';
-
+import { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, filterByIngredient, filterByAppliance, filterByUtensil } from '../scripts/utils/searchAndFilters_Functions.js';
+import { filterAndDisplayRecipes } from '../scripts/utils/searchAndFilters_Logic.js';
 // Récupération des recettes initiales
 function getInitialRecipes() {
     return recipes;
@@ -20,6 +20,31 @@ function filterRecipes(recipes) {
     return filteredRecipes;
 }
 
+function search() {
+    // À l'extérieur, pendant l'initialisation
+    const searchBar = document.querySelector('#searchbar');
+    const searchInput = searchBar.querySelector('input');
+    const searchClose = searchBar.querySelector("svg");
+
+    // Initialiser l'état visuel de la croix
+    searchClose.style.display = searchInput.value ? "block" : "none";
+
+    searchInput.addEventListener('input', (e) => {
+        const searchValue = e.target.value;
+        console.log("Début du filtrage des recettes selon la recherche :", searchValue);
+        searchClose.style.display = searchValue ? "block" : "none";
+        
+        // Appel de filterAndDisplayRecipes avec la valeur actuelle de la barre de recherche
+        filterAndDisplayRecipes(searchValue);
+    });
+
+    searchClose.addEventListener("click", () => {
+        searchInput.value = "";
+        searchClose.style.display = "none";
+        // Après avoir effacé le champ de recherche, réaffichez toutes les recettes ou appliquez le filtre par défaut.
+        displayRecipes(getInitialRecipes());
+    });
+}
 
 
 
@@ -42,6 +67,8 @@ function init() {
 
     // Afficher les recettes filtreées
     filterRecipes(getInitialRecipes());
+
+    search();
 }
 
 // Appel de la fonction d'initialisation après chargement du DOM
