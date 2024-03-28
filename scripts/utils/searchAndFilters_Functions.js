@@ -1,21 +1,28 @@
 // Filtre les recettes en fonction de la recherche
 function searchByQuery(recipes, query) {
-   const filteredRecipes = recipes.filter(recipe => {
-        // Utilisation de la méthode filter pour filtrer les recettes
-        return (
-          // Vérifier si le nom de la recette inclut la valeur de recherche
-          recipe.name.toLowerCase().includes(query.toLowerCase()) ||
-          // Vérifier si la recherche correspond à l'un des ingrédients de la recette
-          recipe.ingredients.some(ingredient =>
-            ingredient.ingredient.toLowerCase().includes(query.toLowerCase())
-          ) ||
-          // Vérifier si la description de la recette inclut la valeur de recherche
-          recipe.description.toLowerCase().includes(query.toLowerCase())
-        );
-      });
-      console.log("Recettes filtrées:", filteredRecipes);
-    return filteredRecipes;
-}
+    if (typeof query !== 'string') {
+        console.error('Le paramètre query doit être une chaîne de caractères :', query);
+        return []; // Retourner un tableau vide ou gérer l'erreur comme nécessaire
+    }
+
+    const filteredRecipes = recipes.filter(recipe => {
+         // Utilisation de la méthode filter pour filtrer les recettes
+         return (
+           // Vérifier si le nom de la recette inclut la valeur de recherche
+           recipe.name.toLowerCase().includes(query.toLowerCase()) ||
+           // Vérifier si la recherche correspond à l'un des ingrédients de la recette
+           recipe.ingredients.some(ingredient =>
+             ingredient.ingredient.toLowerCase().includes(query.toLowerCase())
+           ) ||
+           // Vérifier si la description de la recette inclut la valeur de recherche
+           recipe.description.toLowerCase().includes(query.toLowerCase())
+         );
+       });
+       //console.log("Recettes filtrées:", filteredRecipes);
+     return filteredRecipes;
+ }
+ 
+
 
 // Retourne un tableau des ingrédients uniques en minuscules
 function getUniqueIngredients(recipes) {
@@ -25,7 +32,7 @@ function getUniqueIngredients(recipes) {
             allIngredients.add(ingredient.ingredient.toLowerCase());
         });
     });
-    console.log("Ingrédients uniques:", Array.from(allIngredients));
+    //console.log("Ingrédients uniques:", Array.from(allIngredients));
     return Array.from(allIngredients);
 }
 
@@ -35,7 +42,7 @@ function getUniqueAppliances(recipes) {
     recipes.forEach(recipe => {
         allAppliances.add(recipe.appliance.toLowerCase());
     });
-    console.log("Appareils uniques:", Array.from(allAppliances));
+    //console.log("Appareils uniques:", Array.from(allAppliances));
     return Array.from(allAppliances);
 }
 
@@ -47,7 +54,7 @@ function getUniqueUtensils(recipes) {
             allUtensils.add(utensil.toLowerCase());
         });
     });
-    console.log("Ustensiles uniques:", Array.from(allUtensils));
+    //console.log("Ustensiles uniques:", Array.from(allUtensils));
     return Array.from(allUtensils);
 }
 

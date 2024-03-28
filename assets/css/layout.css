@@ -289,6 +289,7 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 0.4em 0 0.4em 16px;
   list-style: none;
   text-transform: lowercase;
+  cursor: pointer;
 }
 
 #ingredient li::first-letter, #ingredientSelected::first-letter
@@ -362,6 +363,9 @@ input[type="text"] {
 
 /* Bloc de recettes affichés sous forme de carte
 ====================== */
+#no-recipes {
+  white-space: nowrap;
+}
 
 .card {
   border-radius: 20px;

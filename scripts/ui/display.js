@@ -1,8 +1,21 @@
-function displayRecipes(recipes) {
+import { currentSearchQuery } from '../main.js';
+import { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, searchByQuery, filterByIngredient, filterByAppliance, filterByUtensil } from '../utils/searchAndFilters_Functions.js';
+
+
+function displayRecipes(recipes, searchQuery = '', selectedElement) {
     const template = document.querySelector("#recipeCard");
     const container = document.querySelector("#recipes");
+    const totalRecipes = document.querySelector("#totalRecipes");
     container.innerHTML = ''; // Effacer le contenu actuel
-    document.getElementById('totalRecipes').textContent = `${recipes.length} recettes`; // Afficher le nombre de recettes dans <b id="totalRecipes"></b>
+    totalRecipes.textContent = `${recipes.length} recettes`; // Afficher le nombre de recettes dans <b id="totalRecipes"></b>
+
+    let finalRecipes = recipes;
+
+    // Filtrer par selectedElement si spécifié
+    if (selectedElement) {
+        console.log("Step 2 : currentSearchQuery:", currentSearchQuery);
+        finalRecipes = filterByIngredient(finalRecipes, selectedElement);
+    }
 
     // Si des recettes sont disponibles, les afficher sinon afficher "Aucune recette trouvée."
     if (recipes.length > 0) {
@@ -21,13 +34,13 @@ function displayRecipes(recipes) {
             recipe.ingredients.forEach(ingredient => {
                 const listItem = document.createElement('li');
                 // Afficher les informations de l'ingrédient
-                listItem.innerHTML = `${ingredient.ingredient}: ${ingredient.quantity || ''} ${ingredient.unit || ''}`;
+                listItem.innerHTML = `${ingredient.ingredient} <span class="ingredient-quantity">${ingredient.quantity || ''} ${ingredient.unit || ''}</span>`;
                 ingredientsListElement.appendChild(listItem);
             });
             container.appendChild(clone);
         });
     } else {
-        container.innerHTML = '<p>Aucune recette trouvée.</p>';
+        container.innerHTML = `<p id="no-recipes">Aucune recette ne contient <b><u>${searchQuery}</u></b>. Vous pouvez chercher <b>tarte aux pommes</b>, <b>poisson</b>, etc.</p>`;
     }
 }
 
