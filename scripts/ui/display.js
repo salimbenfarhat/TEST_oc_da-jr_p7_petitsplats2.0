@@ -1,18 +1,11 @@
 import { currentSearchQuery } from '../main.js';
-import { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, searchByQuery, filterByIngredient, filterByAppliance, filterByUtensil } from '../utils/searchAndFilters_Functions.js';
+import { filterByIngredient } from '../utils/searchAndFilters_Functions.js';
+import { updateTotalRecipesCount } from '../utils/searchAndFilters_Logic.js';
 
-
-function displayRecipes(recipes, searchQuery = '', selectedElement) {
+function displayRecipes(recipes, searchQuery = '') {
     const template = document.querySelector("#recipeCard");
     const container = document.querySelector("#recipes");
-    const totalRecipes = document.querySelector("#totalRecipes");
     container.innerHTML = ''; // Effacer le contenu actuel
-    
-    // Filtrer par selectedElement si spécifié
-    if (selectedElement) {
-        console.log("Step 2 : currentSearchQuery:", currentSearchQuery);
-        recipes = filterByIngredient(recipes, selectedElement);
-    }
 
     // Si des recettes sont disponibles, les afficher sinon afficher "Aucune recette trouvée."
     if (recipes.length > 0) {

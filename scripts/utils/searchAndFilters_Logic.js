@@ -6,8 +6,11 @@ import { getUniqueIngredients, getUniqueAppliances, getUniqueUtensils, searchByQ
 import { searchRecipesWithLoops, searchRecipesWithFunctionalProgramming } from './searchFunctions.js';
 import { normalizeElement } from './helpers.js';
 
-function filterAndDisplayRecipes(searchQuery, selectedElement) {
-  let filteredRecipes = [...recipes];
+
+let selectedElement = '';
+function filterAndDisplayRecipes(searchQuery) {
+
+  let filteredRecipes = recipes;
       // Vérification si la recherche est activée et contient au moins 3 caractères
       if (searchQuery && typeof searchQuery === 'string' && searchQuery.length > 2) {
         // Appelle la fonction de recherche fonctionnelle
@@ -21,16 +24,23 @@ function filterAndDisplayRecipes(searchQuery, selectedElement) {
         // Si moins de 3 caractères sont entrés, vous pourriez choisir d'afficher toutes les recettes ou de ne rien faire.
         filteredRecipes = recipes;
     }
+    
+
+    if (selectedElement) { // Assurez-vous que selectedIngredient n'est pas vide
+      filteredRecipes = filterByIngredient(filteredRecipes, selectedElement);
+  }
 
   
-    displayRecipes(filteredRecipes, searchQuery, selectedElement);
+    displayRecipes(filteredRecipes, searchQuery);
     // Mettre à jour les listes des filtres en fonction des recettes filtrées
     //updateTotalRecipesCount(filteredRecipes.length);
     updateTotalRecipesCount(filteredRecipes.length);
     updateDropdownLists(filteredRecipes);
+
 }
 
 function updateTotalRecipesCount(count) {
+  console.trace(`Mise à jour du total de recettes à ${count}`);
   const totalRecipesElement = document.getElementById('totalRecipes');
   let totalRecipesText;
   totalRecipesText = count === 0 ? 'Aucune recette' : (count === 1 ? '1 recette' : `${count} recettes`)
@@ -90,11 +100,11 @@ function updateDropdownLists(recipes) {
 
       // Gestion du clic sur les éléments de la liste
         listItem.addEventListener('click', (e) => {
-          const selectedElement = e.target.textContent.trim();
+          selectedElement = e.target.textContent.trim();
 
           
     // Appel direct de filterAndDisplayRecipes avec le bon argument.
-    filterAndDisplayRecipes(currentSearchQuery, selectedElement);
+    filterAndDisplayRecipes(currentSearchQuery);
    
           const badgeType = itemType === 'ingrédient' ? 'ingredient' :
             itemType === 'ustensile' ? 'utensil' :
@@ -133,4 +143,4 @@ function updateDropdownList(items, type) {
     });
 }
 
-export { filterAndDisplayRecipes, updateDropdownLists };
+export { filterAndDisplayRecipes, updateDropdownLists, updateTotalRecipesCount };
