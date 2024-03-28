@@ -7,14 +7,11 @@ function displayRecipes(recipes, searchQuery = '', selectedElement) {
     const container = document.querySelector("#recipes");
     const totalRecipes = document.querySelector("#totalRecipes");
     container.innerHTML = ''; // Effacer le contenu actuel
-    totalRecipes.textContent = `${recipes.length} recettes`; // Afficher le nombre de recettes dans <b id="totalRecipes"></b>
-
-    let finalRecipes = recipes;
-
+    
     // Filtrer par selectedElement si spécifié
     if (selectedElement) {
         console.log("Step 2 : currentSearchQuery:", currentSearchQuery);
-        finalRecipes = filterByIngredient(finalRecipes, selectedElement);
+        recipes = filterByIngredient(recipes, selectedElement);
     }
 
     // Si des recettes sont disponibles, les afficher sinon afficher "Aucune recette trouvée."
