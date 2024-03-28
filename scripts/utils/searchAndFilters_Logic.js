@@ -7,7 +7,7 @@ import { searchRecipesWithLoops, searchRecipesWithFunctionalProgramming } from '
 import { normalizeElement } from './helpers.js';
 
 
-let selectedElement = '';
+let activeFilters = new Set();
 function filterAndDisplayRecipes(searchQuery) {
 
   let filteredRecipes = recipes;
@@ -26,10 +26,9 @@ function filterAndDisplayRecipes(searchQuery) {
     }
     
 
-    if (selectedElement) { // Assurez-vous que selectedIngredient n'est pas vide
-      filteredRecipes = filterByIngredient(filteredRecipes, selectedElement);
-  }
-
+    activeFilters.forEach(filter => {
+      filteredRecipes = filterByIngredient(filteredRecipes, filter); // Assurez-vous que cette fonction peut être utilisée pour tous types de filtres
+  });
   
     displayRecipes(filteredRecipes, searchQuery);
     // Mettre à jour les listes des filtres en fonction des recettes filtrées
@@ -51,9 +50,17 @@ function updateTotalRecipesCount(count) {
   }
 }
 
+let activeBadges = new Set();
 function createBadge(elementDropdownList, keyword) {
   const badgesContainer = document.getElementById('badgesContainer');
   const badge = document.createElement('div');
+
+  if (activeBadges.has(elementDropdownList)) {
+    console.log(`Badge already exists for ${elementDropdownList}, skipping.`);
+    return; // Sortir si le badge existe déjà
+  }
+
+
   badge.classList.add('badge');
   badge.textContent = keyword;
   badge.innerHTML = `${elementDropdownList} 
@@ -61,9 +68,14 @@ function createBadge(elementDropdownList, keyword) {
   <path d="M12 11.5L7 6.5M7 6.5L2 1.5M7 6.5L12 1.5M7 6.5L2 11.5" stroke="#1B1B1B" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
   badgesContainer.appendChild(badge);
-
+  activeBadges.add(elementDropdownList);
   // Optionnel: Ajouter un bouton pour supprimer le badge
-  badge.querySelector('svg').onclick = function() { badgesContainer.removeChild(badge); };
+  badge.querySelector('svg').onclick = function() { 
+    badgesContainer.removeChild(badge); 
+    activeFilters.delete(elementDropdownList); // Supprime le filtre de l'ensemble des filtres actifs
+    filterAndDisplayRecipes(currentSearchQuery);
+  
+  };
 
   // Mettre à jour les résultats de recherche
   filterAndDisplayRecipes(keyword);
@@ -100,7 +112,7 @@ function updateDropdownLists(recipes) {
 
       // Gestion du clic sur les éléments de la liste
         listItem.addEventListener('click', (e) => {
-          selectedElement = e.target.textContent.trim();
+          activeFilters.add(e.target.textContent.trim());
 
           
     // Appel direct de filterAndDisplayRecipes avec le bon argument.
@@ -115,6 +127,8 @@ function updateDropdownLists(recipes) {
             const existingBadge = document.querySelector(`[name="${uniqueName}"]`);
             if (existingBadge) {
               badgesContainer.removeChild(existingBadge);
+              activeFilters.delete(listItem); // Supprime le filtre de l'ensemble des filtres actifs
+            filterAndDisplayRecipes(currentSearchQuery);
               console.log(`Élément désélectionné dans ${itemType}: ${item}`);
             } else {
               createBadge(item, badgesContainer, badgeType);
