@@ -1,5 +1,5 @@
 import { recipes } from '../data/recipes.js';
-import { filterAndDisplayRecipes, updateDropdownLists } from '../scripts/utils/searchAndFilters_Logic.js';
+import { filterAndDisplayRecipes, updateDropdownLists, initDropdownSearch } from '../scripts/utils/searchAndFilters_Logic.js';
 // Récupération des recettes initiales
 
 // Initialisation de la recherche
@@ -31,6 +31,8 @@ function search() {
         // Après avoir effacé le champ de recherche, réaffichez toutes les recettes ou appliquez le filtre par défaut.
         filterAndDisplayRecipes(recipes);
     });
+
+    initDropdownSearch();
 }
 
 
